@@ -58,6 +58,10 @@ Here are a few prelims you may need to do to get this up to speed.
         ```
         - Update the `.env` with the following and save. (Nb. You may need to stop / start the `php` container to allow the new changes to take effect.):
         ```
+            DB_CONNECTION=mysql
+            DB_HOST=mysql_database
+            DB_PORT=3306
+            DB_DATABASE=dev_app
             DB_USERNAME=root
             DB_PASSWORD=root
         ```
