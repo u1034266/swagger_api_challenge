@@ -1,11 +1,17 @@
 # Description
-Simple swagger.io API challenge.
+Simple swagger.io API challenge. This challenge features an architecture style swagger api with one working endpoint, fully dockerized. There is no Frontend yet, but the backend if fully ready to begin dev with VueJs or any frontend framework of your choice.
+
+# Some Screenshots
+- [Endpoint 1](img1.png)
+- [Endpoint 1b](img2.png)
+- [Endpoint 1 Executed](img3.png)
 
 # Technology(ies) used:
 - Laravel 5.8
-- VueJs
 - Docker
-- Swagger.io API 
+- Swagger
+- MySQL
+- nGinx
 
 # Pre-requisites
 - Install `docker-ce` on your host machine
@@ -17,25 +23,20 @@ Here are a few prelims you may need to do to get this up to speed.
 - Note: This may take a while as docker will be pulling in the respective images.
 - Run `$ docker exec -it php sh` to enter the PHP container and do the following:
     - Option 1: Post docker up one-liner for env config:
-    `$ apk --no-cache add make && make initialize && make install_db_deps && make install_npm && npm install`
-    
-    OR
+    `$ apk --no-cache add make && apk --no-cache add libzip-dev && docker-php-ext-install zip && make initialize && make install_db_deps && make install_npm && npm install`
 
-    - Option 2: Run the commands above individually.
-        - `sh` terminal doesn't have `make` so you will need to install that first:
-        ```
-            $ apk --no-cache add make
-        ```
-        - Run `$ make initialize` -- This will install Composer and spin up the Laravel app
-        - Now use run the following definitions from the `Makefile`:
-            - Install Database drivers: `$ make install_db_deps`
-            - Install `npm`: `$ make install_npm` then run `$ npm install`
-            - Reset `storage/` folder perms: `$ make reset_perms`
-        - Run the database migrations:
-        ```
-            $ php artisan migrate
-        ```
-- Database connection issues when running `$ php artisan migrate`:
+    - Reset `storage/` folder perms: `$ make reset_perms`
+    - Run the database migrations:
+    ```
+        $ php artisan migrate
+    ```
+    - Seed the database with seed data:
+    ```
+        $ php artisan db:seed
+    ```
+- Visit the Swagger Documention via: http://localhost:8080/api/documentation
+## Database Migration Issues Troubleshooting
+- If you encounter any database connection issues when running `$ php artisan migrate`, then do the following:
     - If using `PostgreSQL`: 
     Because PostgreSQL is quite qirky with docker, you might get 'connection refused' issues with PHP trying to call the database volume. In this case, do the following:
         - Stop all docker images: `$ docker stop php postgres nginx`
@@ -61,10 +62,12 @@ Here are a few prelims you may need to do to get this up to speed.
             DB_PASSWORD=root
         ```
         - Re-try `$ php artisan migrate` -- It should work fine now.
+        - Re-try `$ php artisan db:seed`
 
         
 # Notes:
 - This is just a simple scaffolding microservices architecture style project with only one working endpoint
+- NodeJs modules have also been installed so you can use VueJS or another of your choice for Front end work.
 - Theres lots more to improve on so please feel free to clone, update and share the fun!
 
 Enjoy!

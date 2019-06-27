@@ -1,0 +1,61 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger API Documentation",
+        "contact": {
+            "email": "tekwie.david@gmail.com"
+        },
+        "license": {
+            "name": "nginx",
+            "url": "https://www.nginx.com/"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/api",
+            "description": "Swagger API Server"
+        }
+    ],
+    "paths": {
+        "/pets": {
+            "get": {
+                "tags": [
+                    "Pets"
+                ],
+                "summary": "Display all Pets",
+                "operationId": "petsAll",
+                "responses": {
+                    "200": {
+                        "description": "Successfully loaded resource"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "X-APP-ID": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            },
+            "X-APP-KEY": {
+                "type": "apiKey",
+                "name": "X-APP-KEY",
+                "in": "header"
+            },
+            "X-API-TOKEN": {
+                "type": "apiKey",
+                "name": "X-API-TOKEN",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Pets",
+            "description": "All Pets"
+        }
+    ]
+}
